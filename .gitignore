@@ -19,6 +19,7 @@ Thumbs.db
 !/tmp/.keep
 
 # Ruby & Gems
+Gemfile.lock
 *.gem
 *.rbc
 .ruby-version
