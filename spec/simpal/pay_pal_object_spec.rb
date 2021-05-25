@@ -47,6 +47,14 @@ RSpec.describe Simpal::PayPalObject do
     it 'is expected to transform items in an Array' do
       expect(object.links.first).to be_a(described_class)
     end
+
+    context 'when the resource has an Array of primitives' do
+      let(:resource) do
+        { variants: %w[ONE TWO] }
+      end
+
+      it { expect { object }.not_to raise_exception }
+    end
   end
 
   describe '#to_hash' do

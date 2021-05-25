@@ -14,7 +14,7 @@ module Simpal
         when Array then value.map { |v| transform.call(nil, v) }
         when Hash  then PayPalObject.new(value)
         else
-          if key.end_with?('date') || key.end_with?('time')
+          if key && (key.end_with?('date') || key.end_with?('time'))
             Time.parse(value)
           else
             value
