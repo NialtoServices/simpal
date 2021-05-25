@@ -27,6 +27,3 @@ Metrics/MethodLength:
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case
-
-Spec/FilePath:
-  Enabled: false
