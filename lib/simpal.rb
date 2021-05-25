@@ -13,7 +13,13 @@ require_relative 'simpal/client_error'
 require_relative 'simpal/client'
 require_relative 'simpal/pay_pal_object'
 require_relative 'simpal/api/orders'
+require_relative 'simpal/api/payments/authorizations'
+require_relative 'simpal/api/payments/captures'
+require_relative 'simpal/api/payments/refunds'
 require_relative 'simpal/order'
+require_relative 'simpal/payment/authorization'
+require_relative 'simpal/payment/capture'
+require_relative 'simpal/payment/refund'
 
 # A simple, lightweight wrapper around PayPal's REST API.
 #
