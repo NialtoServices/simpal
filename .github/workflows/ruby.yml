@@ -7,29 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  brakeman:
-    name: Brakeman
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['2.5', '2.6', '2.7', '3.0']
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
-    - name: Brakeman
-      run: |
-        bundle exec brakeman --run-all-checks --format html --output brakeman-report.html
-    - name: Upload Report
-      if: always()
-      uses: actions/upload-artifact@v1
-      with:
-        name: Brakeman Report
-        path: brakeman-report.html
-
   rubocop:
     name: RuboCop
     runs-on: ubuntu-latest
