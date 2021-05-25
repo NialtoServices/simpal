@@ -3,6 +3,7 @@ PATH
   specs:
     simpal (0.1.0)
       faraday (~> 1.4)
+      faraday_middleware (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -19,6 +20,8 @@ GEM
     faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
+    faraday_middleware (1.0.0)
+      faraday (~> 1.0)
     method_source (1.0.0)
     multipart-post (2.1.1)
     parallel (1.20.1)
