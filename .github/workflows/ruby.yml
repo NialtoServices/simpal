@@ -29,6 +29,7 @@ jobs:
   rspec:
     name: RSpec
     strategy:
+      fail-fast: false
       matrix:
         platform:
           - macos-latest
