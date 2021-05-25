@@ -22,7 +22,7 @@ jobs:
         bundler-cache: true
     - name: Brakeman
       run: |
-        brakeman --run-all-checks --format html --output brakeman-report.html
+        bundle exec brakeman --run-all-checks --format html --output brakeman-report.html
     - name: Upload Report
       if: always()
       uses: actions/upload-artifact@v1
@@ -45,7 +45,7 @@ jobs:
         bundler-cache: true
     - name: RuboCop
       run: |
-        rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
+        bundle exec rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
     - name: Upload Report
       if: always()
       uses: actions/upload-artifact@v1
