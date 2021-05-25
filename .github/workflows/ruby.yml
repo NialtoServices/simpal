@@ -10,45 +10,52 @@ jobs:
   rubocop:
     name: RuboCop
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['2.5', '2.6', '2.7', '3.0']
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+    - uses: ruby/setup-ruby@v1
+      name: Setup Ruby
       with:
-        ruby-version: ${{ matrix.ruby-version }}
+        ruby-version: 3.0
         bundler-cache: true
     - name: RuboCop
-      run: |
-        bundle exec rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
-    - name: Upload Report
+      run: bundle exec rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
+    - uses: actions/upload-artifact@v1
+      name: Upload Report
       if: always()
-      uses: actions/upload-artifact@v1
       with:
         name: RuboCop Report
         path: rubocop-report.html
 
   rspec:
     name: RSpec
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.5', '2.6', '2.7', '3.0']
+        platform:
+          - macos-latest
+          - ubuntu-latest
+        ruby-version:
+          - '2.5'
+          - '2.6'
+          - '2.7'
+          - '3.0'
+          - head
+          - jruby
+          - jruby-head
+          - truffleruby
+          - truffleruby-head
+    runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+    - uses: ruby/setup-ruby@v1
+      name: Setup Ruby
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true
     - name: RSpec
-      run: |
-        bundle exec rspec --format progress --format html --out rspec-report.html
-    - name: Upload Report
+      run: bundle exec rspec --format progress --format html --out rspec-report.html
+    - uses: actions/upload-artifact@v1
+      name: Upload Report
       if: always()
-      uses: actions/upload-artifact@v1
       with:
         name: RSpec Report
         path: rspec-report.html
