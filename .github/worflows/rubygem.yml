@@ -1,0 +1,67 @@
+name: RubyGem
+
+on:
+  - push
+
+jobs:
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.0.1
+    steps:
+    - uses: actions/checkout@v2
+    - name: RubyGems - Install Dependencies
+      run: |
+        gem install brakeman
+    - name: Brakeman
+      run: |
+        brakeman --run-all-checks --format html --output brakeman-report.html
+    - name: Upload Report
+      if: always()
+      uses: actions/upload-artifact@v1
+      with:
+        name: Brakeman Report
+        path: brakeman-report.html
+
+  rubocop:
+    name: RuboCop
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.0.1
+    steps:
+    - uses: actions/checkout@v2
+    - name: RubyGems - Install Dependencies
+      run: |
+        gem install rubocop rubocop-rake rubocop-rspec
+    - name: RuboCop
+      run: |
+        rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
+    - name: Upload Report
+      if: always()
+      uses: actions/upload-artifact@v1
+      with:
+        name: RuboCop Report
+        path: rubocop-report.html
+
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.0.1
+    steps:
+    - uses: actions/checkout@v2
+    - name: RubyGems - Install Dependencies
+      run: |
+        gem install bundler
+        bundle config --local path vendor/bundle
+        bundle install --jobs 4 --retry 3
+    - name: RSpec
+      run: |
+        bundle exec rspec --format progress --format html --out rspec-report.html
+    - name: Upload Report
+      if: always()
+      uses: actions/upload-artifact@v1
+      with:
+        name: RSpec Report
+        path: rspec-report.html
