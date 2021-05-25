@@ -12,6 +12,8 @@ require_relative 'simpal/middleware/headers'
 require_relative 'simpal/client_error'
 require_relative 'simpal/client'
 require_relative 'simpal/pay_pal_object'
+require_relative 'simpal/api/orders'
+require_relative 'simpal/order'
 
 # A simple, lightweight wrapper around PayPal's REST API.
 #
