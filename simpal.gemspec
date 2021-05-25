@@ -2,7 +2,7 @@
 
 require_relative 'lib/simpal/constants'
 
-Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
+Gem::Specification.new do |spec|
   spec.name = 'simpal'
   spec.version = Simpal::VERSION
   spec.authors = ['Nialto Services']
