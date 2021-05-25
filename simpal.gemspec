@@ -2,7 +2,7 @@
 
 require_relative 'lib/simpal/constants'
 
-Gem::Specification.new do |spec|
+Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name = 'simpal'
   spec.version = Simpal::VERSION
   spec.authors = ['Nialto Services']
@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday', '~> 1.4'
   spec.add_dependency 'faraday_middleware', '~> 1.0'
 
+  spec.add_development_dependency 'brakeman'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
