@@ -1,19 +1,25 @@
-name: RubyGem
+name: Ruby
 
 on:
-  - push
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   brakeman:
     name: Brakeman
     runs-on: ubuntu-latest
-    container:
-      image: ruby:3.0.1
+    strategy:
+      matrix:
+        ruby-version: ['2.5', '2.6', '2.7', '3.0']
     steps:
     - uses: actions/checkout@v2
-    - name: RubyGems - Install Dependencies
-      run: |
-        gem install brakeman
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
     - name: Brakeman
       run: |
         brakeman --run-all-checks --format html --output brakeman-report.html
@@ -27,13 +33,16 @@ jobs:
   rubocop:
     name: RuboCop
     runs-on: ubuntu-latest
-    container:
-      image: ruby:3.0.1
+    strategy:
+      matrix:
+        ruby-version: ['2.5', '2.6', '2.7', '3.0']
     steps:
     - uses: actions/checkout@v2
-    - name: RubyGems - Install Dependencies
-      run: |
-        gem install rubocop rubocop-rake rubocop-rspec
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
     - name: RuboCop
       run: |
         rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
@@ -47,15 +56,16 @@ jobs:
   rspec:
     name: RSpec
     runs-on: ubuntu-latest
-    container:
-      image: ruby:3.0.1
+    strategy:
+      matrix:
+        ruby-version: ['2.5', '2.6', '2.7', '3.0']
     steps:
     - uses: actions/checkout@v2
-    - name: RubyGems - Install Dependencies
-      run: |
-        gem install bundler
-        bundle config --local path vendor/bundle
-        bundle install --jobs 4 --retry 3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
     - name: RSpec
       run: |
         bundle exec rspec --format progress --format html --out rspec-report.html
