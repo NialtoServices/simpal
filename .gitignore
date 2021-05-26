@@ -34,7 +34,6 @@ Gemfile.lock
 /vendor/bundle
 
 # RSpec
-.rspec_status
 /spec/reports/
 /spec/examples.txt
 
