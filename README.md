@@ -20,7 +20,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First, create a client ID and secret from the [Applications](https://developer.paypal.com/developer/applications) page
+of your PayPal account dashboard.
+
+Then, create a client which uses these credentials:
+
+```ruby
+Simpal.client = Simpal::Client.new(
+  client_id: 'CLIENT_ID',
+  client_secret: 'CLIENT_SECRET',
+  sandbox: true
+)
+```
+
+The value of **Simpal.client** is to make requests, unless the **client** attribute is specified on a per-request basis.
+The **sandbox** attribute defaults to **false** if omitted.
+
+Once the client has been setup, it's easy to retrieve an order:
+
+```ruby
+Simpal::Order.retrieve('ORDER_ID')
+```
 
 ## Development
 
