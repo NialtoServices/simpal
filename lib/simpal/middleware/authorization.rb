@@ -49,10 +49,16 @@ module Simpal
         end
       end
 
+      def expiry_base_date_for(response)
+        Time.httpdate(response.headers['date'])
+      rescue StandardError
+        Time.now
+      end
+
       def refresh_access_token!
         response = connection.post('/v1/oauth2/token', grant_type: :client_credentials)
         @access_token = response.body['access_token']
-        @access_token_expires_at = Time.httpdate(response.headers['date']) + response.body['expires_in']
+        @access_token_expires_at = expiry_base_date_for(response) + response.body['expires_in'].to_i
       end
 
       def refresh_access_token
