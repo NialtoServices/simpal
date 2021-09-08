@@ -45,7 +45,7 @@ module Simpal
           connection.use Faraday::Request::UrlEncoded
           connection.use Faraday::Response::RaiseError
           connection.use FaradayMiddleware::ParseJson
-          connection.basic_auth(client.client_id, client.client_secret)
+          connection.request(:basic_auth, client.client_id, client.client_secret)
         end
       end
 
