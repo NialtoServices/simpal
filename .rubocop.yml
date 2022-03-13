@@ -11,7 +11,17 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Exclude:
+    - '**/*.gemspec'
     - 'spec/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'spec/support/fake_*.rb'
+
+Metrics/MethodLength:
+  Max: 40
+  Exclude:
+    - 'spec/support/fake_*.rb'
 
 Metrics/AbcSize:
   Max: 40
@@ -21,9 +31,6 @@ Metrics/CyclomaticComplexity:
 
 Metrics/PerceivedComplexity:
   Max: 20
-
-Metrics/MethodLength:
-  Max: 40
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case

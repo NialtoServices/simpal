@@ -85,3 +85,5 @@ RSpec.configure do |config|
   # passing the same `--seed` value as the one that triggered the failure.
   Kernel.srand config.seed
 end
+
+Dir.glob(File.expand_path('./support/**/*.rb', __dir__)).sort.each { |f| require(f) }
