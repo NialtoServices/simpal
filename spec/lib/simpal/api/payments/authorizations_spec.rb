@@ -30,7 +30,7 @@ RSpec.describe Simpal::API::Payments::Authorizations do
 
     it_behaves_like 'bad credentials raise an exception'
 
-    it 'is expected to eq the reauthorized authorization' do
+    it 'is expected to eq the updated authorization' do
       expect(reauthorize).to match(hash_including('id' => id))
     end
   end
@@ -42,7 +42,8 @@ RSpec.describe Simpal::API::Payments::Authorizations do
 
     it_behaves_like 'bad credentials raise an exception'
 
-    it 'is expected to eq the captured order' do
+    it 'is expected to eq the created capture' do
+      # The mocking library reuses the authorization's ID on the capture to make testing easier.
       expect(capture).to match(hash_including('id' => id, 'status' => 'COMPLETED'))
     end
   end

@@ -38,6 +38,27 @@ class FakePayPal < Sinatra::Base
     render(status_code: 204)
   end
 
+  get '/v2/payments/captures/:id' do
+    return render(status_code: 401) unless bearer_authorization.is_a?(String)
+    return render(status_code: 404) unless params[:id] =~ /^[A-Z0-9]{17}$/
+
+    render json: build_capture(id: params[:id])
+  end
+
+  post '/v2/payments/captures/:id/refund' do
+    return render(status_code: 401) unless bearer_authorization.is_a?(String)
+    return render(status_code: 404) unless params[:id] =~ /^[A-Z0-9]{17}$/
+
+    render json: build_refund(id: params[:id])
+  end
+
+  get '/v2/payments/refunds/:id' do
+    return render(status_code: 401) unless bearer_authorization.is_a?(String)
+    return render(status_code: 404) unless params[:id] =~ /^[A-Z0-9]{17}$/
+
+    render json: build_refund(id: params[:id])
+  end
+
   private
 
   def basic_authorization
@@ -182,6 +203,28 @@ class FakePayPal < Sinatra::Base
         },
         {
           href: "https://#{server_name}/v2/checkout/orders/#{id}",
+          method: 'GET',
+          rel: 'up'
+        }
+      ]
+    }
+  end
+
+  def build_refund(id:, status: 'CREATED')
+    server_name = request.env['SERVER_NAME']
+    time = DateTime.now
+
+    {
+      id: id,
+      status: 'COMPLETED',
+      links: [
+        {
+          href: "https://#{server_name}/v2/payments/refunds/#{id}",
+          method: 'GET',
+          rel: 'self'
+        },
+        {
+          href: "https://#{server_name}/v2/payments/captures/#{id}",
           method: 'GET',
           rel: 'up'
         }
