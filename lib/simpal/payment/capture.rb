@@ -28,7 +28,7 @@ module Simpal
       # @return         [Simpal::PayPalObject] An object representing the refunded payment.
       #
       def self.refund(id, params = {}, headers: {}, client: nil)
-        resource = API::Payments::Captures.capture(id, params, headers: headers, client: client)
+        resource = API::Payments::Captures.refund(id, params, headers: headers, client: client)
         PayPalObject.new(resource)
       end
     end
