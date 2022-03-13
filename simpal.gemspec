@@ -29,9 +29,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'faraday', '~> 2.0'
 
-  spec.add_development_dependency 'guard'
-  spec.add_development_dependency 'guard-rspec'
-  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'guard', '~> 2.18'
+  spec.add_development_dependency 'guard-rspec', '~> 4.7'
+  spec.add_development_dependency 'pry', '~> 0.14.1'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 1.7'
