@@ -54,8 +54,6 @@ RSpec.describe Simpal::API::Payments::Authorizations do
 
     it_behaves_like 'bad credentials raise an exception'
 
-    it 'is expected to eq true' do
-      expect(void).to eq(true)
-    end
+    it { is_expected.to eq(true) }
   end
 end
