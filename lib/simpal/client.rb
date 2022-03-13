@@ -51,12 +51,15 @@ module Simpal
     #
     def connection
       @connection ||= Faraday.new(service_url, headers: headers) do |connection|
-        connection.use Faraday::Response::RaiseError
+        connection.request :json
+
+        connection.response :raise_error
+        connection.response :json
+
         connection.use Simpal::Middleware::Headers
-        connection.use FaradayMiddleware::EncodeJson
-        connection.use FaradayMiddleware::ParseJson
         connection.use Simpal::Middleware::Authorization, self
-        connection.adapter Faraday.default_adapter
+
+        connection.adapter :net_http
       end
     end
   end

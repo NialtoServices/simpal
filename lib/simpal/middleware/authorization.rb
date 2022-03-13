@@ -42,10 +42,12 @@ module Simpal
 
       def connection
         @connection ||= Faraday.new(client.service_url, headers: client.headers) do |connection|
-          connection.use Faraday::Request::UrlEncoded
-          connection.use Faraday::Response::RaiseError
-          connection.use FaradayMiddleware::ParseJson
-          connection.request(:basic_auth, client.client_id, client.client_secret)
+          connection.request :url_encoded
+
+          connection.response :raise_error
+          connection.response :json
+
+          connection.request :authorization, :basic, client.client_id, client.client_secret
         end
       end
 

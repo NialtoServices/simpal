@@ -50,11 +50,10 @@ module Simpal
       # @param  id      [String]         The ID of an authorized payment.
       # @param  headers [Hash]           The custom headers to add to the request.
       # @param  client  [Simpal::Client] The API client to make the request with.
-      # @return         [Boolean]        `true` if the authorization was voided, else an exception is raised.
+      # @return         [Boolean]        `true` when the authorization has been voided, `false` otherwise.
       #
       def self.void(id, headers: {}, client: nil)
         API::Payments::Authorizations.void(id, headers: headers, client: client)
-        true
       end
     end
   end
