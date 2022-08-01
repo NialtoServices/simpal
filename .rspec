@@ -1,1 +1,2 @@
+--require sinatra/base
 --require spec_helper

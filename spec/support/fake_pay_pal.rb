@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'sinatra/base'
-
 class FakePayPal < Sinatra::Base
   post '/v1/oauth2/token' do
     return render(status_code: 401) if params['grant_type'] != 'client_credentials'
