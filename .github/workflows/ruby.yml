@@ -1,31 +1,29 @@
 name: Ruby
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   rubocop:
     name: RuboCop
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      name: Checkout Source Code
-    - uses: ruby/setup-ruby@v1
-      name: Setup Ruby
-      with:
-        ruby-version: 3.0
-        bundler-cache: true
-    - name: RuboCop
-      run: bundle exec rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
-    - uses: actions/upload-artifact@v1
-      name: Upload Report
-      if: always()
-      with:
-        name: RuboCop Report
-        path: rubocop-report.html
+      - uses: actions/checkout@v2
+        name: Checkout Source Code
+      - uses: ruby/setup-ruby@v1
+        name: Setup Ruby
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+      - name: RuboCop
+        run: bundle exec rubocop --parallel --fail-level warning --format progress --format html --out rubocop-report.html
+      - uses: actions/upload-artifact@v1
+        name: Upload Report
+        if: always()
+        with:
+          name: RuboCop Report
+          path: rubocop-report.html
 
   rspec:
     name: RSpec
@@ -47,18 +45,18 @@ jobs:
           - truffleruby-head
     runs-on: ${{ matrix.platform }}
     steps:
-    - uses: actions/checkout@v2
-      name: Checkout Source Code
-    - uses: ruby/setup-ruby@v1
-      name: Setup Ruby
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
-    - name: RSpec
-      run: bundle exec rspec --format progress --format html --out rspec-report.html
-    - uses: actions/upload-artifact@v1
-      name: Upload Report
-      if: always()
-      with:
-        name: RSpec Report
-        path: rspec-report.html
+      - uses: actions/checkout@v2
+        name: Checkout Source Code
+      - uses: ruby/setup-ruby@v1
+        name: Setup Ruby
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - name: RSpec
+        run: bundle exec rspec --format progress --format html --out rspec-report.html
+      - uses: actions/upload-artifact@v1
+        name: Upload Report
+        if: always()
+        with:
+          name: RSpec Report
+          path: rspec-report.html
