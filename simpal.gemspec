@@ -32,12 +32,12 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'guard', '~> 2.18'
   spec.add_development_dependency 'guard-rspec', '~> 4.7'
-  spec.add_development_dependency 'pry', '~> 0.14.1'
+  spec.add_development_dependency 'pry', '~> 0.14'
   spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.7'
-  spec.add_development_dependency 'rubocop-rake', '~> 0.5.1'
-  spec.add_development_dependency 'rubocop-rspec', '~> 2.3'
-  spec.add_development_dependency 'sinatra', '~> 2.1'
+  spec.add_development_dependency 'rspec', '~> 3.11'
+  spec.add_development_dependency 'rubocop', '~> 1.32'
+  spec.add_development_dependency 'rubocop-rake', '~> 0.6'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.12'
+  spec.add_development_dependency 'sinatra', '~> 2.2'
   spec.add_development_dependency 'webmock', '~> 3.14'
 end
