@@ -210,9 +210,8 @@ class FakePayPal < Sinatra::Base
     }
   end
 
-  def build_refund(id:, status: 'CREATED')
+  def build_refund(id:)
     server_name = request.env['SERVER_NAME']
-    time = DateTime.now
 
     {
       id: id,

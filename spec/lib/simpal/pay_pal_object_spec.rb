@@ -24,7 +24,7 @@ RSpec.describe Simpal::PayPalObject do
 
   context 'when calling an undefined method' do
     it { is_expected.to respond_to(:undefined_method) }
-    it { expect(object.undefined_method).to eq(nil) }
+    it { expect(object.undefined_method).to be_nil }
   end
 
   describe '#initialize' do

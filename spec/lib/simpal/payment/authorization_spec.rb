@@ -21,7 +21,7 @@ RSpec.describe Simpal::Payment::Authorization do
     it { is_expected.to be_a(Simpal::PayPalObject) }
 
     it 'is expected to eq the authorization' do
-      expect(retrieve.id).to eq(id)
+      expect(retrieve).to have_attributes(id: id)
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe Simpal::Payment::Authorization do
     it { is_expected.to be_a(Simpal::PayPalObject) }
 
     it 'is expected to eq the updated authorization' do
-      expect(reauthorize.id).to eq(id)
+      expect(reauthorize).to have_attributes(id: id)
     end
   end
 
@@ -50,8 +50,7 @@ RSpec.describe Simpal::Payment::Authorization do
 
     it 'is expected to eq the created capture' do
       # The mocking library reuses the authorization's ID on the capture to make testing easier.
-      expect(capture.id).to eq(id)
-      expect(capture.status).to eq('COMPLETED')
+      expect(capture).to have_attributes(id: id, status: 'COMPLETED')
     end
   end
 
@@ -62,6 +61,6 @@ RSpec.describe Simpal::Payment::Authorization do
 
     it_behaves_like 'bad credentials raise an exception'
 
-    it { is_expected.to eq(true) }
+    it { is_expected.to be(true) }
   end
 end

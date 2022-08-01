@@ -17,7 +17,7 @@ RSpec.describe Simpal::Client do
 
     context 'when :sandbox is not provided' do
       it 'is expected to default #sandbox to `false`' do
-        expect(client.sandbox).to eq(false)
+        expect(client.sandbox).to be(false)
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Simpal::Client do
       subject(:client) { described_class.new(client_id: client_id, client_secret: client_secret, sandbox: true) }
 
       it 'is expected to assign :sandbox to #sandbox' do
-        expect(client.sandbox).to eq(true)
+        expect(client.sandbox).to be(true)
       end
     end
   end

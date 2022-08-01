@@ -21,7 +21,7 @@ RSpec.describe Simpal::Payment::Refund do
     it { is_expected.to be_a(Simpal::PayPalObject) }
 
     it 'is expected to eq the refund' do
-      expect(retrieve.id).to eq(id)
+      expect(retrieve).to have_attributes(id: id)
     end
   end
 end

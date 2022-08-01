@@ -21,7 +21,7 @@ RSpec.describe Simpal::Payment::Capture do
     it { is_expected.to be_a(Simpal::PayPalObject) }
 
     it 'is expected to eq the capture' do
-      expect(retrieve.id).to eq(id)
+      expect(retrieve).to have_attributes(id: id)
     end
   end
 
@@ -36,8 +36,7 @@ RSpec.describe Simpal::Payment::Capture do
 
     it 'is expected to eq the refund' do
       # The mocking library reuses the capture's ID on the refund to make testing easier.
-      expect(refund.id).to eq(id)
-      expect(refund.status).to eq('COMPLETED')
+      expect(refund).to have_attributes(id: id, status: 'COMPLETED')
     end
   end
 end
