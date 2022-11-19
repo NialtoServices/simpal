@@ -34,3 +34,7 @@ Metrics/PerceivedComplexity:
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case
+
+RSpec/FilePath:
+  Exclude:
+    - spec/lib/simpal/paypal_object_spec.rb
