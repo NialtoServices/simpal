@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 module Simpal
-  VERSION = '1.0.2'
+  # @return [String] The gem's semantic version number.
+  #
+  VERSION = '1.1.0'
 end
